@@ -19,6 +19,12 @@
             align-items: center;
         }
 
+        .menu-kanan {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
         .navbar a {
             color: white;
             text-decoration: none;
@@ -26,7 +32,16 @@
             padding: 10px 16px;
             border-radius: 10px;
             font-weight: bold;
-            margin-left: 8px;
+        }
+
+        .logout-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         .container {
@@ -84,9 +99,27 @@
 <div class="navbar">
     <h2>Admin DapoerAmel</h2>
 
-    <div>
-        <a href="{{ route('customer.menu') }}">Menu Customer</a>
-        <a href="{{ route('menus.index') }}">CRUD Menu</a>
+    <div class="menu-kanan">
+
+        <a href="{{ route('customer.menu') }}">
+            Menu Customer
+        </a>
+
+        <a href="{{ route('menus.index') }}">
+            CRUD Menu
+        </a>
+
+        <a href="{{ route('transactions.create') }}">
+            Input Transaksi
+        </a>
+
+        <form action="{{ route('logout') }}" method="POST" style="margin:0;">
+            @csrf
+            <button type="submit" class="logout-btn">
+                Logout
+            </button>
+        </form>
+
     </div>
 </div>
 
@@ -111,15 +144,23 @@
                 <td>#{{ $order->id }}</td>
                 <td>{{ $order->table_number }}</td>
                 <td>Rp {{ number_format($order->total_price, 0, ',', '.') }}</td>
-                <td><span class="status">{{ ucfirst($order->status) }}</span></td>
+                <td>
+                    <span class="status">
+                        {{ ucfirst($order->status) }}
+                    </span>
+                </td>
                 <td>{{ $order->created_at->format('d-m-Y H:i') }}</td>
                 <td>
-                    <a href="{{ route('orders.show', $order->id) }}" class="btn">Detail</a>
+                    <a href="{{ route('orders.show', $order->id) }}" class="btn">
+                        Detail
+                    </a>
                 </td>
             </tr>
         @empty
             <tr>
-                <td colspan="7" style="text-align:center;">Belum ada pesanan masuk.</td>
+                <td colspan="7" style="text-align:center;">
+                    Belum ada pesanan masuk.
+                </td>
             </tr>
         @endforelse
     </table>

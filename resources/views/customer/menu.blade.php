@@ -136,7 +136,20 @@
 
 <div class="navbar">
     <h2>🍛 DapoerAmel</h2>
-    <a href="{{ route('cart.index') }}">🛒 Keranjang</a>
+
+    <div style="display:flex; gap:10px;">
+
+        @auth
+            <a href="{{ route('orders.index') }}">
+                Dashboard Admin
+            </a>
+        @endauth
+
+        <a href="{{ route('cart.index') }}">
+            🛒 Keranjang
+        </a>
+
+    </div>
 </div>
 
 <div class="container">
